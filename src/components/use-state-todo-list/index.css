@@ -1,0 +1,10 @@
+.todo-list {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.todo-item {
+    flex: 1;
+}
