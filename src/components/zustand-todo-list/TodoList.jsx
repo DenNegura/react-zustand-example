@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import {useTodoStore} from "../../store/useTodoStore.js";
 import './index.css'
 
@@ -10,10 +9,6 @@ function TodoList() {
     const fetchTodos = useTodoStore((state) => state.fetchTodos);
     const deleteTodo = useTodoStore((state) => state.deleteTodo);
     const toggleTodo = useTodoStore((state) => state.toggleTodo);
-
-    useEffect(() => {
-        fetchTodos();
-    }, [fetchTodos]);
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -38,6 +33,7 @@ function TodoList() {
                     <button onClick={() => deleteTodo(todo.id)}>Delete</button>
                 </div>
             ))}
+            <button onClick={fetchTodos}>Refresh</button>
         </div>
     );
 }
