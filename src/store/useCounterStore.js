@@ -1,23 +1,14 @@
 import {create} from "zustand";
+import {devtools} from 'zustand/middleware';
 
-export const useCounterStore = create((set, /* get, state */) => ({
-    count: 0,
-    reset: () => set({count: 0}),
-    increment: () => set((state) => ({count: state.count + 1})),
-    decrement: () => set((state) => ({count: state.count - 1})),
+const initialState = {count: 0}
 
-    /*
-    // set with state
-    inc_1: () => set((state) => ({count: state.count + 1})),
-    // get with set
-    inc_2: () => {
-      const count = get().count;
-      set({count: count + 1});
-    },
-    // store
-    inc_3: () => {
-        store.setState({count: store.getState().count + 1});
-    },
-    * */
-}))
+const counterStore = (set) => ({
+    ...initialState,
+    reset: () => set({count: 0}, false, 'reset'),
+    increment: () => set((state) => ({count: state.count + 1}), false, 'increment'),
+    decrement: () => set((state) => ({count: state.count - 1}), false, 'decrement'),
+});
+
+export const useCounterStore = create(devtools(counterStore))
 
